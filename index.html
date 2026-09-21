@@ -20,11 +20,14 @@
 
   html { scroll-behavior: smooth; }
 
+  html {
+    background: #05070f;
+  }
+
   body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     background: linear-gradient(165deg, #0a0f2e 0%, #0d1b4b 45%, #000000 100%);
-    background-attachment: fixed;
     color: #f5f5fa;
     display: flex;
     justify-content: center;
@@ -35,7 +38,7 @@
 
   body::before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
     background:
       radial-gradient(circle at 18% 12%, rgba(79, 179, 255, 0.22), transparent 48%),
@@ -293,6 +296,7 @@
 </style>
 </head>
 <body>
+<div class="container">
 
   <!-- ================================================
        EMPLACEMENTS PHOTOS — dis-moi "mets [image] dans [SLOT]"
@@ -404,5 +408,6 @@
     <footer class="fade-in">© 2026 Loan</footer>
 
   </div>
+</div>
 </body>
 </html>
