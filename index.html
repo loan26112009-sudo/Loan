@@ -34,7 +34,7 @@
 
   .page {
     width: 100%;
-    max-width: 900px;
+    max-width: 760px;
   }
 
   @keyframes fadeUp {
@@ -42,53 +42,24 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .tile {
+  /* --- Profile header (separate from the grid, full width) --- */
+  .profile {
     opacity: 0;
     animation: fadeUp 0.55s ease forwards;
-  }
-
-  /* --- Bento grid --- */
-  .bento {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 132px;
-    grid-auto-flow: dense;
-    gap: 14px;
-  }
-
-  .tile {
     border-radius: 22px;
     background: var(--card);
     border: 1px solid var(--card-border);
-    overflow: hidden;
-    position: relative;
     display: flex;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
-    transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-  }
-
-  /* Accessible keyboard focus, visible on every interactive tile */
-  a.tile:focus-visible {
-    outline: 2px solid var(--sky);
-    outline-offset: 3px;
-  }
-
-  /* --- Profile card --- */
-  .t-profile {
-    grid-column: span 2;
-    grid-row: span 2;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 10px;
-    padding: 20px;
-    animation-delay: 0.02s;
+    gap: 18px;
+    padding: 22px;
+    margin-bottom: 14px;
   }
 
   .avatar-photo {
-    width: 88px;
-    height: 88px;
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: linear-gradient(150deg, rgba(79, 195, 255, 0.3), rgba(20, 20, 20, 0.6));
     display: flex;
@@ -98,110 +69,103 @@
     box-shadow: 0 0 0 4px rgba(79, 195, 255, 0.08);
   }
 
-  .avatar-photo svg { width: 30px; height: 30px; opacity: 0.55; }
+  .avatar-photo svg { width: 28px; height: 28px; opacity: 0.55; }
 
-  .t-profile h1 {
-    font-size: 25px;
+  .profile-info { min-width: 0; }
+
+  .profile-info h1 {
+    font-size: 22px;
     font-weight: 800;
     color: var(--sky);
     letter-spacing: 0.3px;
   }
 
-  .t-profile .subtitle {
-    font-size: 12.5px;
+  .profile-info .subtitle {
+    margin-top: 3px;
+    font-size: 12px;
     color: var(--text-dim);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.6px;
   }
 
-  .t-profile .tagline {
-    font-size: 12.5px;
+  .profile-info .tagline {
+    margin-top: 8px;
+    font-size: 13px;
     color: rgba(245, 245, 250, 0.78);
     font-weight: 400;
-    max-width: 210px;
     line-height: 1.45;
   }
 
-  /* --- Link tiles: icon badge + name + handle, for clear, accessible targets --- */
-  .t-link {
-    align-items: center;
-    gap: 12px;
-    padding: 0 18px;
-    font-weight: 600;
-    color: #fff;
-    text-decoration: none;
+  /* --- Uniform grid: every tile is the exact same square shape --- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
   }
 
+  .tile {
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .tile:nth-child(1) { animation-delay: 0.04s; }
+  .tile:nth-child(2) { animation-delay: 0.08s; }
+  .tile:nth-child(3) { animation-delay: 0.12s; }
+  .tile:nth-child(4) { animation-delay: 0.16s; }
+  .tile:nth-child(5) { animation-delay: 0.2s; }
+  .tile:nth-child(6) { animation-delay: 0.24s; }
+  .tile:nth-child(7) { animation-delay: 0.28s; }
+  .tile:nth-child(8) { animation-delay: 0.32s; }
+
+  a.tile:focus-visible {
+    outline: 2px solid var(--sky);
+    outline-offset: 3px;
+  }
+
+  a.tile:hover { transform: translateY(-3px); background: var(--card-hover); border-color: rgba(255, 255, 255, 0.18); }
+
+  /* --- Link tiles --- */
   .link-badge {
-    flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 13px;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .link-badge svg { width: 22px; height: 22px; }
+  .link-badge svg { width: 20px; height: 20px; }
 
   .link-badge.yt { background: #ff0033; }
   .link-badge.ig { background: linear-gradient(140deg, #fdc468 0%, #e1306c 45%, #833ab4 100%); }
   .link-badge.tt { background: #ffffff; }
 
-  .link-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .link-text strong { font-size: 15.5px; font-weight: 700; }
-  .link-text small { font-size: 12px; font-weight: 500; color: var(--text-dim); }
+  .t-link strong { font-size: 14px; font-weight: 700; }
+  .t-link small { font-size: 10.5px; font-weight: 500; color: var(--text-dim); }
 
-  .t-link .go-arrow {
-    margin-left: auto;
-    width: 16px;
-    height: 16px;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: opacity 0.22s ease, transform 0.22s ease;
-    flex-shrink: 0;
-  }
-
-  .t-link:hover,
-  .t-link:focus-visible {
-    transform: translateY(-3px);
-    background: var(--card-hover);
-    border-color: rgba(255, 255, 255, 0.18);
-  }
-
-  .t-link:hover .go-arrow,
-  .t-link:focus-visible .go-arrow { opacity: 0.6; transform: translateX(0); }
-
-  .t-youtube:hover, .t-youtube:focus-visible { border-color: rgba(255, 0, 51, 0.5); box-shadow: 0 8px 24px rgba(255, 0, 51, 0.18); }
-  .t-instagram:hover, .t-instagram:focus-visible { border-color: rgba(225, 48, 108, 0.5); box-shadow: 0 8px 24px rgba(225, 48, 108, 0.16); }
-  .t-tiktok:hover, .t-tiktok:focus-visible { border-color: rgba(255, 255, 255, 0.35); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1); }
-
-  .t-youtube { grid-column: span 2; grid-row: span 1; animation-delay: 0.08s; }
-  .t-instagram { grid-column: span 1; grid-row: span 1; animation-delay: 0.14s; }
-  .t-tiktok { grid-column: span 1; grid-row: span 1; animation-delay: 0.2s; }
-
-  /* Stacked layout for the two narrower link tiles */
-  .t-instagram, .t-tiktok {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-    padding: 14px 10px;
-  }
-
-  .t-instagram .link-text, .t-tiktok .link-text { align-items: center; }
-  .t-instagram .go-arrow, .t-tiktok .go-arrow { display: none; }
+  .t-youtube:hover { border-color: rgba(255, 0, 51, 0.5); box-shadow: 0 8px 24px rgba(255, 0, 51, 0.18); }
+  .t-instagram:hover { border-color: rgba(225, 48, 108, 0.5); box-shadow: 0 8px 24px rgba(225, 48, 108, 0.16); }
+  .t-tiktok:hover { border-color: rgba(255, 255, 255, 0.35); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1); }
 
   /* --- Photo tiles --- */
-  .t-photo {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--text-dim);
-    text-decoration: none;
-  }
+  .t-photo { color: var(--text-dim); }
 
   .t-photo .photo-fill {
     position: absolute;
@@ -214,29 +178,22 @@
   .t-photo .slot-label {
     position: relative;
     z-index: 1;
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 0 10px;
+    gap: 5px;
   }
 
-  .t-photo .slot-label svg { width: 20px; height: 20px; opacity: 0.55; }
+  .t-photo .slot-label svg { width: 18px; height: 18px; opacity: 0.55; }
 
-  .t-photo:hover, .t-photo:focus-visible { transform: translateY(-3px); border-color: rgba(79, 195, 255, 0.35); }
-
-  .t-photo-1 { grid-column: span 1; grid-row: span 2; animation-delay: 0.1s; }
-  .t-photo-2 { grid-column: span 2; grid-row: span 1; animation-delay: 0.26s; }
-  .t-photo-3 { grid-column: span 1; grid-row: span 1; animation-delay: 0.32s; }
-  .t-photo-4 { grid-column: span 2; grid-row: span 1; animation-delay: 0.38s; }
-  .t-photo-5 { grid-column: span 2; grid-row: span 1; animation-delay: 0.44s; }
+  .t-photo:hover { border-color: rgba(79, 195, 255, 0.35); }
 
   footer {
-    margin-top: 28px;
+    margin-top: 24px;
     text-align: center;
     font-size: 12px;
     font-weight: 400;
@@ -264,27 +221,16 @@
   .scroll-top:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   .scroll-top svg { width: 20px; height: 20px; stroke: #06121a; }
 
-  /* --- Mobile: 2-column bento --- */
-  @media (max-width: 700px) {
-    .bento {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 128px;
-    }
-
-    .t-profile { grid-column: span 2; grid-row: span 2; }
-    .t-youtube { grid-column: span 2; }
-    .t-instagram { grid-column: span 1; }
-    .t-tiktok { grid-column: span 1; }
-    .t-photo-1 { grid-column: span 1; grid-row: span 2; }
-    .t-photo-2 { grid-column: span 1; grid-row: span 2; }
-    .t-photo-3 { grid-column: span 2; grid-row: span 1; }
-    .t-photo-4 { grid-column: span 2; grid-row: span 1; }
-    .t-photo-5 { grid-column: span 2; grid-row: span 1; }
+  /* --- Mobile: still a uniform grid, just fewer columns --- */
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .profile { padding: 18px; gap: 14px; }
+    .avatar-photo { width: 64px; height: 64px; }
+    .profile-info h1 { font-size: 19px; }
   }
 
-  @media (max-width: 380px) {
-    .avatar-photo { width: 76px; height: 76px; }
-    .t-profile h1 { font-size: 22px; }
+  @media (max-width: 400px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -296,38 +242,27 @@
        SLOT: photo-profil | galerie-1 .. galerie-5
        ================================================ -->
 
-  <div class="bento">
-
-    <!-- Profil -->
-    <div class="tile t-profile">
-      <!-- SLOT: photo-profil -->
-      <div class="avatar-photo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
-      </div>
+  <div class="profile">
+    <!-- SLOT: photo-profil -->
+    <div class="avatar-photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </div>
+    <div class="profile-info">
       <h1>Loan</h1>
       <p class="subtitle">Réalisateur · YouTube</p>
       <p class="tagline">Je transforme des idées en films.</p>
     </div>
+  </div>
+
+  <div class="grid">
 
     <!-- YouTube -->
     <a class="tile t-link t-youtube" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="YouTube — chaîne @Loaaannn">
       <span class="link-badge yt">
         <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c2 .6 9.4.6 9.4.6s7.4 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
       </span>
-      <span class="link-text">
-        <strong>YouTube</strong>
-        <small>@Loaaannn</small>
-      </span>
-      <svg class="go-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
-    </a>
-
-    <!-- SLOT: galerie-1 -->
-    <a class="tile t-photo t-photo-1" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="Galerie photo 1">
-      <div class="photo-fill"></div>
-      <span class="slot-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
-        Galerie 1
-      </span>
+      <strong>YouTube</strong>
+      <small>@Loaaannn</small>
     </a>
 
     <!-- Instagram -->
@@ -335,10 +270,8 @@
       <span class="link-badge ig">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg>
       </span>
-      <span class="link-text">
-        <strong>Instagram</strong>
-        <small>@Loan_yt</small>
-      </span>
+      <strong>Instagram</strong>
+      <small>@Loan_yt</small>
     </a>
 
     <!-- TikTok -->
@@ -346,14 +279,21 @@
       <span class="link-badge tt">
         <svg viewBox="0 0 24 24" fill="#0a0a0a" aria-hidden="true"><path d="M16.6 3h-3.2v13a2.7 2.7 0 1 1-2.1-2.6v-3.2a5.9 5.9 0 1 0 5.3 5.9V9.6a7.2 7.2 0 0 0 4.4 1.5V8a4 4 0 0 1-4.4-5Z"/></svg>
       </span>
-      <span class="link-text">
-        <strong>TikTok</strong>
-        <small>@repost_loan</small>
+      <strong>TikTok</strong>
+      <small>@repost_loan</small>
+    </a>
+
+    <!-- SLOT: galerie-1 -->
+    <a class="tile t-photo" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="Galerie photo 1">
+      <div class="photo-fill"></div>
+      <span class="slot-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        Galerie 1
       </span>
     </a>
 
     <!-- SLOT: galerie-2 -->
-    <a class="tile t-photo t-photo-2" href="https://instagram.com/Loan_yt" target="_blank" rel="noopener" aria-label="Galerie photo 2">
+    <a class="tile t-photo" href="https://instagram.com/Loan_yt" target="_blank" rel="noopener" aria-label="Galerie photo 2">
       <div class="photo-fill"></div>
       <span class="slot-label">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
@@ -362,7 +302,7 @@
     </a>
 
     <!-- SLOT: galerie-3 -->
-    <a class="tile t-photo t-photo-3" href="https://tiktok.com/@repost_loan" target="_blank" rel="noopener" aria-label="Galerie photo 3">
+    <a class="tile t-photo" href="https://tiktok.com/@repost_loan" target="_blank" rel="noopener" aria-label="Galerie photo 3">
       <div class="photo-fill"></div>
       <span class="slot-label">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
@@ -371,7 +311,7 @@
     </a>
 
     <!-- SLOT: galerie-4 -->
-    <a class="tile t-photo t-photo-4" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="Galerie photo 4">
+    <a class="tile t-photo" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="Galerie photo 4">
       <div class="photo-fill"></div>
       <span class="slot-label">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
@@ -380,7 +320,7 @@
     </a>
 
     <!-- SLOT: galerie-5 -->
-    <a class="tile t-photo t-photo-5" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="Galerie photo 5">
+    <a class="tile t-photo" href="https://youtube.com/@Loaaannn" target="_blank" rel="noopener" aria-label="Galerie photo 5">
       <div class="photo-fill"></div>
       <span class="slot-label">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
